@@ -1,0 +1,90 @@
+@use "../../shared/styles/" as *;
+
+.clock {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  height: 350px;
+  width: 350px;
+
+  border-radius: 50%;
+
+  background: linear-gradient(155deg, $darkBlue 20%, $lightBlue 100%);
+
+  z-index: 1;
+
+  &:before {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(155deg, $lightBlue 50%, $darkBlue 50%);
+    transform: translate3d(0px, 0px, 0) scale(1.5);
+    filter: blur(50px);
+    // opacity: var(0.7);
+    transition: opacity 0.3s;
+    border-radius: inherit;
+  }
+
+  &::after {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: inherit;
+    border-radius: inherit;
+  }
+
+  .innerCircle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    width: 90%;
+    height: 90%;
+
+    border-radius: 50%;
+
+    background: $darkBlue;
+  }
+
+  .progress {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    height: 93%;
+    width: 93%;
+
+    border-radius: 50%;
+
+    background: radial-gradient(closest-side, $darkBlue 93%, transparent 80% 100%), conic-gradient($loaderColor 75%, $darkBlue 0);
+  }
+
+  .time {
+    font-size: 80px;
+    font-family: "Poppins";
+    font-weight: bold;
+  }
+
+  .clockButton {
+    border: none;
+
+    background: none;
+    color: white;
+
+    letter-spacing: 15px;
+  }
+}
