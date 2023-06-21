@@ -12,9 +12,7 @@ function App() {
 		<div className={styles.app}>
 			<Logo />
 			<ModeSlider />
-			{/* <ProgressBar /> */}
 			<Clock />
-
 			<Options />
 		</div>
 	);

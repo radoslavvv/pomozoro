@@ -8,7 +8,5 @@ export interface IClockState {
 	endTime: any;
 	currentTime: any;
 
-	intervalId: number;
-
 	clockMode: ClockMode;
 }

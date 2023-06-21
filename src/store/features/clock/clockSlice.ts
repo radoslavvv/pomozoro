@@ -11,7 +11,6 @@ const initialState: IClockState = {
 	endTime: null,
 	currentTime: null,
 
-	intervalId: -1,
 	clockMode: ClockMode.Pomodoro,
 };
 
@@ -35,9 +34,6 @@ export const clockSlice = createSlice({
 		setIsFinished: (state, action: PayloadAction<boolean>) => {
 			state.isFinished = action.payload;
 		},
-		setIntervalId: (state, action: PayloadAction<number>) => {
-			state.intervalId = action.payload;
-		},
 		setClockMode: (state, action: PayloadAction<ClockMode>) => {
 			state.clockMode = action.payload;
 		},
@@ -50,7 +46,6 @@ export const {
 	setCurrentTime,
 	setIsRunning,
 	setIsFinished,
-	setIntervalId,
 	setClockMode,
 } = clockSlice.actions;
 

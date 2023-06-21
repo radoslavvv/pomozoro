@@ -12,7 +12,6 @@ import {
 	setEndTime,
 	setIsRunning,
 	setCurrentTime,
-	setIntervalId,
 	setIsFinished,
 	setStartTime,
 } from "../../store/features/clock/clockSlice";
@@ -34,15 +33,9 @@ const Clock = (props: IClockProps) => {
 		(state: RootState) => state.clock.isRunning
 	);
 
-	console.log("render", isRunning);
-
 	const isFinished: boolean = useSelector(
 		(state: RootState) => state.clock.isFinished
 	);
-
-	// const intervalId: number = useSelector(
-	// 	(state: RootState) => state.clock.intervalId
-	// );
 
 	const updateClock = (): void => {
 		setTimeout(() => {
@@ -96,11 +89,6 @@ const Clock = (props: IClockProps) => {
 		dispatch(setIsRunning(false));
 	};
 
-	// const stopClock = () => {
-	// 	dispatch(setIsRunning(false));
-	// 	dispatch(setIsFinished(true));
-	// };
-
 	const clockButtonClickHandler = (): void => {
 		if (isRunning) {
 			pauseClock();
@@ -108,12 +96,6 @@ const Clock = (props: IClockProps) => {
 			startClock();
 		}
 	};
-
-	// useEffect(() => {
-	// 	if (isRunning && !isFinished) {
-	// 		updateTimer();
-	// 	}
-	// }, [isRunning, startTime, endTime, isFinished]);
 
 	return (
 		<div className={styles.clockContainer}>
