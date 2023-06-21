@@ -1,54 +1,58 @@
 @use "../../shared/styles/" as *;
 
 .modeSlider {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
 
-  height: 50px;
+	height: 50px;
 
-  padding: 10px;
-  margin-bottom: 45px;
-  border-radius: 60px;
-  background: $darkBlue;
+	padding: 10px;
+	margin-bottom: 45px;
+	border-radius: 60px;
+	background: $darkBlue;
 
-  font-family: "Poppins";
-  font-size: 15px;
-  font-weight: bold;
+	font-family: "Poppins";
+	font-size: 15px;
+	font-weight: bold;
 
-  z-index: 2;
+	z-index: 2;
 
-  &__option {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	transform: scaleX(0);
+	animation: strechOut 0.5s ease-in-out forwards;
+	animation-delay: 0.5s;
 
-    height: 35px;
-    width: 120px;
+	&__option {
+		display: flex;
+		justify-content: center;
+		align-items: center;
 
-    padding: 0px 20px;
-    border-radius: 60px;
+		height: 35px;
+		width: 120px;
 
-    color: $lightGray;
+		padding: 0px 20px;
+		border-radius: 60px;
 
-    font-size: 12px;
-    font-weight: bold;
+		color: $lightGray;
 
-    cursor: pointer;
-    transition-duration: 0.1s;
+		font-size: 12px;
+		font-weight: bold;
 
-    &:hover {
-      transform: scale(1.02);
-    }
+		cursor: pointer;
+		transition-duration: 0.1s;
 
-    &.selected {
-      color: $darkBlue;
-      background: $loaderColor;
+		&:hover {
+			transform: scale(1.02);
+		}
 
-      &:hover {
-        transform: scale(1);
-      }
-    }
-  }
+		&.selected {
+			color: $darkBlue;
+			background: $loaderColor;
+
+			&:hover {
+				transform: scale(1);
+			}
+		}
+	}
 }

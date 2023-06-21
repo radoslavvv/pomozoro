@@ -1,90 +1,109 @@
 @use "../../shared/styles/" as *;
 
-.clock {
-  position: relative;
+.clockContainer {
+	position: relative;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+	animation: scaleUp 0.6s ease-in-out;
 
-  height: 350px;
-  width: 350px;
+	.clock {
+		position: relative;
 
-  border-radius: 50%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
 
-  background: linear-gradient(155deg, $darkBlue 20%, $lightBlue 100%);
+		height: 350px;
+		width: 350px;
 
-  z-index: 1;
+		border-radius: 50%;
 
-  &:before {
-    content: "";
-    z-index: -1;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: linear-gradient(155deg, $lightBlue 50%, $darkBlue 50%);
-    transform: translate3d(0px, 0px, 0) scale(1.5);
-    filter: blur(50px);
-    // opacity: var(0.7);
-    transition: opacity 0.3s;
-    border-radius: inherit;
-  }
+		background: linear-gradient(155deg, $darkBlue 20%, $lightBlue 100%);
 
-  &::after {
-    content: "";
-    z-index: -1;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: inherit;
-    border-radius: inherit;
-  }
+		z-index: 1;
 
-  .innerCircle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+		&:before {
+			content: "";
+			z-index: -1;
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			background: linear-gradient(155deg, $lightBlue 50%, $darkBlue 50%);
+			transform: translate3d(0px, 0px, 0) scale(1.5);
+			filter: blur(50px);
+			// opacity: var(0.7);
+			transition: opacity 0.3s;
+			border-radius: inherit;
+		}
 
-    width: 90%;
-    height: 90%;
+		&::after {
+			content: "";
+			z-index: -1;
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			background: inherit;
+			border-radius: inherit;
+		}
 
-    border-radius: 50%;
+		.innerCircle {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
 
-    background: $darkBlue;
-  }
+			width: 90%;
+			height: 90%;
 
-  .progress {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+			border-radius: 50%;
 
-    height: 93%;
-    width: 93%;
+			background: $darkBlue;
+		}
 
-    border-radius: 50%;
+		.progress {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
 
-    background: radial-gradient(closest-side, $darkBlue 93%, transparent 80% 100%), conic-gradient($loaderColor 75%, $darkBlue 0);
-  }
+			height: 93%;
+			width: 93%;
 
-  .time {
-    font-size: 80px;
-    font-family: "Poppins";
-    font-weight: bold;
-  }
+			border-radius: 50%;
 
-  .clockButton {
-    border: none;
+			background: radial-gradient(
+					closest-side,
+					$darkBlue 93%,
+					transparent 80% 100%
+				),
+				conic-gradient($loaderColor 75%, $darkBlue 0);
+		}
 
-    background: none;
-    color: white;
+		.time {
+			font-size: 80px;
+			font-family: "Poppins";
+			font-weight: bold;
 
-    letter-spacing: 15px;
-  }
+			z-index: 2;
+
+			&:hover {
+				transform: scale(1.03);
+			}
+		}
+
+		.clockButton {
+			border: none;
+
+			background: none;
+			color: white;
+
+			letter-spacing: 15px;
+
+			z-index: 2;
+		}
+	}
 }
