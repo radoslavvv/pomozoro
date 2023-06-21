@@ -1,40 +1,40 @@
 @use "../../shared/styles/" as *;
 
 .logo {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
 
-  margin-top: 45px;
-  margin-bottom: 45px;
+	margin-top: 45px;
+	margin-bottom: 45px;
 
-  color: $white;
+	color: $white;
 
-  font-family: "Pacifico";
-  font-size: 35px;
+	font-family: "Pacifico";
+	font-size: 35px;
 
-  z-index: 2;
-  transition-duration: 0.3s;
-  user-select: none;
+	z-index: 2;
+	transition-duration: 0.3s;
+	user-select: none;
 
-  &:hover {
-    transform: scale(1.03);
+	&:hover {
+		transform: scale(1.05);
 
-    span {
-      transform: scale(1.05);
-    }
-  }
+		span {
+			transform: scale(1.07);
+		}
+	}
 
-  span {
-    margin-left: -3px;
+	span {
+		margin-left: -3px;
 
-    color: #e62121;
+		color: #e62121;
 
-    font-family: "Comforter";
-    font-size: 105px;
-    line-height: 70px;
-    font-weight: bold;
+		font-family: "Comforter";
+		font-size: 105px;
+		line-height: 70px;
+		font-weight: bold;
 
-    transition-duration: 0.3s;
-  }
+		transition-duration: 0.3s;
+	}
 }
