@@ -2,7 +2,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import ClockMode from "../../../shared/enums/ClockMode";
 import { IOptionsState } from "./IOptionsSlice";
 
-const initialState: IOptionsState = {};
+const initialState: IOptionsState = {
+  pomodoroMinutes: 15,
+  shortBreakMinutes: 5,
+  longBreakMinutes: 15,
+};
 
 export const OptionsSlice = createSlice({
   name: "clock",

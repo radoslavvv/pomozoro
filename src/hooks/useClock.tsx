@@ -3,29 +3,31 @@ import { setCurrentTime, setEndTime, setIsFinished, setIsRunning, setStartTime, 
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../store/Store";
+import ClockMode from "../shared/enums/ClockMode";
+import ClockService from "../services/ClockService";
 
 const useClock = () => {
   const dispatch = useAppDispatch();
 
   const startTime: any = useSelector((state: RootState) => state.clock.startTime);
-
   const endTime: any = useSelector((state: RootState) => state.clock.endTime);
 
-  const isRunning: boolean = useSelector((state: RootState) => state.clock.isRunning);
-
-  const isFinished: boolean = useSelector((state: RootState) => state.clock.isFinished);
-
   const currentTime: any = endTime && startTime ? moment.duration(endTime.diff(startTime)) : null;
-
   const currentTimeMinutes = currentTime && Math.abs(currentTime.minutes())?.toString()?.padStart(2, "0");
   const currentTimeSeconds = currentTime && Math.abs(currentTime.seconds())?.toString()?.padStart(2, "0");
+
+  const isRunning: boolean = useSelector((state: RootState) => state.clock.isRunning);
+  const isFinished: boolean = useSelector((state: RootState) => state.clock.isFinished);
+
+  const currentClockMode: ClockMode = useSelector((state: RootState) => state.clock.clockMode);
+  const clockMinutes: number = ClockService.getCurrentClockModeMinutes(currentClockMode);
 
   const clockFormattedCurrentTime = currentTime ? (
     <>
       {currentTimeMinutes}:{currentTimeSeconds}
     </>
   ) : (
-    "15:00"
+    `${clockMinutes.toString().padStart(2, "0")}:00`
   );
 
   const updateClock = (): void => {
@@ -56,7 +58,7 @@ const useClock = () => {
       currentStartTime = moment();
       dispatch(setStartTime(currentStartTime));
 
-      currentEndTime = moment().add(0.1, "minute").add(4, "second");
+      currentEndTime = moment().add(clockMinutes, "minute");
       dispatch(setEndTime(currentEndTime));
 
       const totalTime = moment.duration(currentEndTime.diff(currentStartTime));
