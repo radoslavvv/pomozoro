@@ -1,12 +1,14 @@
 import ClockMode from "../../../shared/enums/ClockMode";
 
 export interface IClockState {
-	isRunning: boolean;
-	isFinished: boolean;
+  isRunning: boolean;
+  isFinished: boolean;
 
-	startTime: any;
-	endTime: any;
-	currentTime: any;
+  startTime: any;
+  endTime: any;
 
-	clockMode: ClockMode;
+  currentTime: any;
+  totalTime: any;
+
+  clockMode: ClockMode;
 }

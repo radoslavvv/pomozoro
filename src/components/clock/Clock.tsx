@@ -8,122 +8,100 @@ import { useSelector } from "react-redux";
 
 import styles from "./Clock.module.scss";
 import { useEffect } from "react";
-import {
-	setEndTime,
-	setIsRunning,
-	setCurrentTime,
-	setIsFinished,
-	setStartTime,
-} from "../../store/features/clock/clockSlice";
+import { setEndTime, setIsRunning, setCurrentTime, setIsFinished, setStartTime, setTotalTime } from "../../store/features/clock/ClockSlice";
 
 const Clock = (props: IClockProps) => {
-	const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
-	const startTime: any = useSelector(
-		(state: RootState) => state.clock.startTime
-	);
+  const startTime: any = useSelector((state: RootState) => state.clock.startTime);
 
-	const endTime: any = useSelector((state: RootState) => state.clock.endTime);
+  const endTime: any = useSelector((state: RootState) => state.clock.endTime);
 
-	const currentTime: moment.Moment = useSelector(
-		(state: RootState) => state.clock.currentTime
-	);
+  const currentTime: moment.Moment = useSelector((state: RootState) => state.clock.currentTime);
 
-	const isRunning: boolean = useSelector(
-		(state: RootState) => state.clock.isRunning
-	);
+  const isRunning: boolean = useSelector((state: RootState) => state.clock.isRunning);
 
-	const isFinished: boolean = useSelector(
-		(state: RootState) => state.clock.isFinished
-	);
+  const isFinished: boolean = useSelector((state: RootState) => state.clock.isFinished);
 
-	const updateClock = (): void => {
-		setTimeout(() => {
-			const clockIsRunning: boolean = store.getState().clock.isRunning;
-			if (clockIsRunning) {
-				const currentEndTime: moment.Moment =
-					store.getState().clock.endTime;
-				const currentStartTime: moment.Moment =
-					store.getState().clock.startTime;
+  const updateClock = (): void => {
+    setTimeout(() => {
+      const clockIsRunning: boolean = store.getState().clock.isRunning;
+      if (clockIsRunning) {
+        const currentEndTime: moment.Moment = store.getState().clock.endTime;
+        const currentStartTime: moment.Moment = store.getState().clock.startTime;
 
-				const currentTime: moment.Duration = moment.duration(
-					currentEndTime.diff(currentStartTime)
-				);
+        const currentTime: moment.Duration = moment.duration(currentEndTime.diff(currentStartTime));
 
-				dispatch(setCurrentTime(currentTime));
-				dispatch(
-					setStartTime(moment(currentStartTime).add(1, "second"))
-				);
+        console.log(currentTime.asMilliseconds());
 
-				if (currentTime.minutes() <= 0 && currentTime.seconds() <= 0) {
-					dispatch(setIsRunning(false));
-					dispatch(setIsFinished(true));
-				} else {
-					updateClock();
-				}
-			}
-		}, 1000);
-	};
+        dispatch(setCurrentTime(currentTime));
+        dispatch(setStartTime(moment(currentStartTime).add(1, "second")));
 
-	const startClock = (): void => {
-		let currentEndTime: moment.Moment;
-		let currentStartTime: moment.Moment;
-		if (isFinished) {
-			currentStartTime = moment();
-			dispatch(setStartTime(currentStartTime));
+        if (currentTime.minutes() <= 0 && currentTime.seconds() <= 0) {
+          dispatch(setIsRunning(false));
+          dispatch(setIsFinished(true));
+        } else {
+          updateClock();
+        }
+      }
+    }, 1000);
+  };
 
-			currentEndTime = moment().add(0.1, "minute").add(4, "second");
-			dispatch(setEndTime(currentEndTime));
-		} else {
-			currentEndTime = endTime;
-			currentStartTime = startTime;
-		}
+  const startClock = (): void => {
+    let currentEndTime: moment.Moment;
+    let currentStartTime: moment.Moment;
+    if (isFinished) {
+      currentStartTime = moment();
+      dispatch(setStartTime(currentStartTime));
 
-		dispatch(setIsRunning(true));
-		dispatch(setIsFinished(false));
+      currentEndTime = moment().add(0.1, "minute").add(4, "second");
+      dispatch(setEndTime(currentEndTime));
 
-		updateClock();
-	};
+      const totalTime = moment.duration(currentEndTime.diff(currentStartTime));
+      dispatch(setTotalTime(totalTime));
+      console.log("total time is set: ", totalTime.milliseconds());
+    } else {
+      currentEndTime = endTime;
+      currentStartTime = startTime;
+    }
 
-	const pauseClock = () => {
-		dispatch(setIsRunning(false));
-	};
+    dispatch(setIsRunning(true));
+    dispatch(setIsFinished(false));
 
-	const clockButtonClickHandler = (): void => {
-		if (isRunning) {
-			pauseClock();
-		} else {
-			startClock();
-		}
-	};
+    updateClock();
+  };
 
-	return (
-		<div className={styles.clockContainer}>
-			<div className={styles.clock} onClick={clockButtonClickHandler}>
-				<ProgressBar />
-				<div className={styles.innerCircle}>
-					<span className={styles.time}>
-						{currentTime ? (
-							<>
-								{Math.abs(currentTime?.minutes())
-									?.toString()
-									?.padStart(2, "0")}
-								:
-								{Math.abs(currentTime?.seconds())
-									?.toString()
-									?.padStart(2, "0")}
-							</>
-						) : (
-							"15:00"
-						)}
-					</span>
-					<button className={styles.clockButton}>
-						{isRunning ? "PAUSE" : "START"}
-					</button>
-				</div>
-			</div>
-		</div>
-	);
+  const pauseClock = () => {
+    dispatch(setIsRunning(false));
+  };
+
+  const clockButtonClickHandler = (): void => {
+    if (isRunning) {
+      pauseClock();
+    } else {
+      startClock();
+    }
+  };
+
+  return (
+    <div className={styles.clockContainer}>
+      <div className={styles.clock} onClick={clockButtonClickHandler}>
+        <ProgressBar />
+        <div className={styles.innerCircle}>
+          <span className={styles.time}>
+            {currentTime ? (
+              <>
+                {Math.abs(currentTime?.minutes())?.toString()?.padStart(2, "0")}:{Math.abs(currentTime?.seconds())?.toString()?.padStart(2, "0")}
+              </>
+            ) : (
+              "15:00"
+            )}
+          </span>
+          <button className={styles.clockButton}>{isRunning ? "PAUSE" : "START"}</button>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Clock;

@@ -1,127 +1,118 @@
 @use "../../shared/styles/" as *;
 
 .clockContainer {
-	position: relative;
+  position: relative;
 
-	animation: scaleUp 0.6s ease-in-out;
+  animation: scaleUp 0.6s ease-in-out;
 
-	.clock {
-		position: relative;
+  .clock {
+    position: relative;
 
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 
-		height: 350px;
-		width: 350px;
+    height: 350px;
+    width: 350px;
 
-		border-radius: 50%;
+    border-radius: 50%;
 
-		background: linear-gradient(155deg, $darkBlue 20%, $lightBlue 100%);
+    background: linear-gradient(155deg, $darkBlue 20%, $lightBlue 100%);
 
-		z-index: 1;
+    z-index: 1;
 
-		// -webkit-box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.75);
-		// -moz-box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.75);
-		// box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.75);
+    // -webkit-box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.75);
+    // -moz-box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.75);
+    // box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.75);
 
-		// &:before {
-		// 	content: "";
-		// 	z-index: -1;
-		// 	position: absolute;
-		// 	top: 0;
-		// 	right: 0;
-		// 	bottom: 0;
-		// 	left: 0;
-		// 	background: linear-gradient(155deg, $lightBlue 50%, $darkBlue 50%);
-		// 	transform: translate3d(0px, 0px, 0) scale(1.5);
-		// 	filter: blur(50px);
-		// 	// opacity: var(0.7);
-		// 	inset: -5px;
-		// 	transition: opacity 0.3s;
-		// 	border-radius: inherit;
-		// }
+    &:before {
+      content: "";
+      z-index: -1;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: linear-gradient(155deg, $lightBlue 50%, $darkBlue 50%);
+      transform: translate3d(0px, 0px, 0) scale(1.5);
+      filter: blur(50px);
+      // opacity: var(0.7);
+      inset: -5px;
+      transition: opacity 0.3s;
+      border-radius: inherit;
+    }
 
-		// &::after {
-		// 	content: "";
-		// 	z-index: -1;
-		// 	position: absolute;
-		// 	top: 0;
-		// 	right: 0;
-		// 	bottom: 0;
-		// 	left: 0;
-		// 	background: inherit;
-		// 	border-radius: inherit;
-		// }
-		cursor: pointer;
+    &::after {
+      content: "";
+      z-index: -1;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: inherit;
+      border-radius: inherit;
+    }
+    cursor: pointer;
 
-		transition-duration: 0.3s;
+    transition-duration: 0.3s;
 
-		&:hover {
-			transform: scale(1.03);
-		}
+    &:hover {
+      transform: scale(1.03);
+    }
 
-		&:active {
-			transform: scale(0.85);
-		}
+    &:active {
+      transform: scale(0.85);
+    }
 
-		.innerCircle {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			flex-direction: column;
+    .innerCircle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
 
-			width: 90%;
-			height: 90%;
+      width: 90%;
+      height: 90%;
 
-			border-radius: 50%;
+      border-radius: 50%;
 
-			background: $darkBlue;
+      background: $darkBlue;
 
-			user-select: none;
-		}
+      user-select: none;
+    }
 
-		.progress {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			flex-direction: column;
+    .progress {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
 
-			height: 93%;
-			width: 93%;
+      height: 93%;
+      width: 93%;
 
-			border-radius: 50%;
+      border-radius: 50%;
 
-			background: radial-gradient(
-					closest-side,
-					$darkBlue 93%,
-					transparent 80% 100%
-				),
-				conic-gradient($loaderColor 75%, $darkBlue 0);
-		}
+      background: radial-gradient(closest-side, $darkBlue 93%, transparent 80% 100%), conic-gradient($loaderColor 75%, $darkBlue 0);
+    }
 
-		.time {
-			font-size: 80px;
-			font-family: "Poppins";
-			font-weight: bold;
+    .time {
+      font-size: 80px;
+      font-family: "Poppins";
+      font-weight: bold;
 
-			z-index: 2;
+      z-index: 2;
+    }
 
-			&:hover {
-				transform: scale(1.03);
-			}
-		}
+    .clockButton {
+      border: none;
 
-		.clockButton {
-			border: none;
+      background: none;
+      color: white;
 
-			background: none;
-			color: white;
+      letter-spacing: 15px;
 
-			letter-spacing: 15px;
-
-			z-index: 2;
-		}
-	}
+      z-index: 2;
+    }
+  }
 }
