@@ -17,35 +17,34 @@ const Clock = (props: IClockProps) => {
 
   const endTime: any = useSelector((state: RootState) => state.clock.endTime);
 
-  const currentTime: moment.Moment = useSelector((state: RootState) => state.clock.currentTime);
+  // const currentTime: moment.Moment = useSelector((state: RootState) => state.clock.currentTime);
 
   const isRunning: boolean = useSelector((state: RootState) => state.clock.isRunning);
 
   const isFinished: boolean = useSelector((state: RootState) => state.clock.isFinished);
 
+  const currentTime: any = endTime && startTime ? moment.duration(endTime.diff(startTime)) : null;
+
   const updateClock = (): void => {
-    setTimeout(() => {
-      const clockIsRunning: boolean = store.getState().clock.isRunning;
-      if (clockIsRunning) {
-        const currentEndTime: moment.Moment = store.getState().clock.endTime;
-        const currentStartTime: moment.Moment = store.getState().clock.startTime;
+    if (isRunning) {
+      dispatch(setCurrentTime(currentTime));
 
-        const currentTime: moment.Duration = moment.duration(currentEndTime.diff(currentStartTime));
+      setTimeout(() => {
+        dispatch(setStartTime(moment(startTime).add(1, "second")));
+      }, 1000);
 
-        console.log(currentTime.asMilliseconds());
-
-        dispatch(setCurrentTime(currentTime));
-        dispatch(setStartTime(moment(currentStartTime).add(1, "second")));
-
-        if (currentTime.minutes() <= 0 && currentTime.seconds() <= 0) {
-          dispatch(setIsRunning(false));
-          dispatch(setIsFinished(true));
-        } else {
-          updateClock();
-        }
+      if (currentTime.minutes() <= 0 && currentTime.seconds() <= 0) {
+        dispatch(setIsRunning(false));
+        dispatch(setIsFinished(true));
       }
-    }, 1000);
+    }
   };
+
+  useEffect(() => {
+    if (isRunning) {
+      updateClock();
+    }
+  }, [isRunning, startTime]);
 
   const startClock = (): void => {
     let currentEndTime: moment.Moment;
@@ -68,7 +67,7 @@ const Clock = (props: IClockProps) => {
     dispatch(setIsRunning(true));
     dispatch(setIsFinished(false));
 
-    updateClock();
+    // updateClock();
   };
 
   const pauseClock = () => {

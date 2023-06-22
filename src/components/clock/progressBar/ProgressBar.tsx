@@ -6,25 +6,15 @@ import { RootState, useAppDispatch } from "../../../store/Store";
 import { useSelector } from "react-redux";
 
 const ProgressBar = (props: IProgressBarProps) => {
-  const dispatch = useAppDispatch();
-
-  const [progressBarValue, setProgressBarValue] = useState(0);
-
   const currentTime: moment.Duration = useSelector((state: RootState) => state.clock.currentTime);
   const totalTime: moment.Duration = useSelector((state: RootState) => state.clock.totalTime);
 
   let progressBarPercentage: number = 0;
 
   if (currentTime && totalTime) {
-    console.log("time", currentTime.asMilliseconds(), totalTime.asMilliseconds());
-
     const timePercentage: number = Math.round(((totalTime.asMilliseconds() - currentTime.asMilliseconds()) * 100) / totalTime.asMilliseconds());
-    console.log("time percentage", timePercentage);
     progressBarPercentage = (timePercentage / 100) * 900;
-    console.log("progress percentage", progressBarPercentage);
   }
-
-  //   useEffect(() => {}, [currentTime]);
 
   return (
     <>
