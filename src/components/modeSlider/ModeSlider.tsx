@@ -4,7 +4,11 @@ import IModeSliderProps from "./IModeSliderProps";
 import styles from "./ModeSlider.module.scss";
 import { RootState, useAppDispatch } from "../../store/Store";
 import ClockMode from "../../shared/enums/ClockMode";
-import { setClockMode } from "../../store/features/clock/ClockSlicee.ts";
+import {
+	pause,
+	reset,
+	setClockMode,
+} from "../../store/features/clock/ClockSlicee.ts";
 
 const ModeSlider = (props: IModeSliderProps) => {
 	const dispatch = useAppDispatch();
@@ -15,6 +19,7 @@ const ModeSlider = (props: IModeSliderProps) => {
 
 	const modeClickHandler = (clockMode: ClockMode) => {
 		dispatch(setClockMode(clockMode));
+		dispatch(reset());
 	};
 
 	const clockModeIsSelected = (optionClockMode: ClockMode) => {

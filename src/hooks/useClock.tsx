@@ -1,5 +1,6 @@
 import moment from "moment";
 import {
+	pause,
 	setCurrentTime,
 	setEndTime,
 	setIsFinished,
@@ -118,7 +119,7 @@ const useClock = () => {
 	};
 
 	const pauseClock = () => {
-		dispatch(setIsRunning(false));
+		dispatch(pause());
 	};
 
 	const clockButtonClickHandler = (): void => {
@@ -128,6 +129,12 @@ const useClock = () => {
 			startClock();
 		}
 	};
+
+	useEffect(() => {
+		if (!isRunning && isFinished) {
+			dispatch(setProgressBarValue(0));
+		}
+	}, [progressBarValue]);
 
 	useEffect(() => {
 		if (isRunning) {

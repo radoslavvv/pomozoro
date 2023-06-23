@@ -47,6 +47,21 @@ export const ClockSlice = createSlice({
 		setProgressBarValue: (state, action: PayloadAction<any>) => {
 			state.progressBarValue = action.payload;
 		},
+		pause: (state) => {
+			state.isRunning = false;
+		},
+		reset: (state) => {
+			state.isRunning = false;
+			state.isFinished = true;
+
+			state.startTime = null;
+			state.endTime = null;
+			state.currentTime = null;
+
+			state.totalDuration = null;
+
+			state.progressBarValue = 0;
+		},
 	},
 });
 
@@ -59,6 +74,8 @@ export const {
 	setIsFinished,
 	setClockMode,
 	setProgressBarValue,
+	pause,
+	reset,
 } = ClockSlice.actions;
 
 export default ClockSlice;

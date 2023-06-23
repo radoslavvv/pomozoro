@@ -23,6 +23,10 @@
 	animation: strechOut 0.5s ease-in-out forwards;
 	animation-delay: 0.5s;
 
+	@include mobile {
+		width: 95vw;
+	}
+
 	&__option {
 		display: flex;
 		justify-content: center;
