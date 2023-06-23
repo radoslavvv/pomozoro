@@ -9,7 +9,6 @@ import ClockService from "../services/ClockService";
 const useClock = () => {
   const dispatch = useAppDispatch();
 
-  const clockCurrentTime: moment.Duration = useSelector((state: RootState) => state.clock.currentTime);
   const totalTime: moment.Duration = useSelector((state: RootState) => state.clock.totalTime);
 
   const startTime: any = useSelector((state: RootState) => state.clock.startTime);
