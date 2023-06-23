@@ -11,7 +11,7 @@ const initialState: IClockState = {
   endTime: null,
 
   currentTime: null,
-  totalTime: null,
+  totalDuration: null,
 
   progressBarValue: 0,
 
@@ -31,12 +31,11 @@ export const ClockSlice = createSlice({
     setCurrentTime: (state, action: PayloadAction<any>) => {
       state.currentTime = action.payload;
     },
-    setTotalTime: (state, action: PayloadAction<any>) => {
-      state.totalTime = action.payload;
+    setTotalDuration: (state, action: PayloadAction<any>) => {
+      state.totalDuration = action.payload;
     },
     setIsRunning: (state, action: PayloadAction<boolean>) => {
       state.isRunning = action.payload;
-      // console.log("update timer done ", state.clockIsRunning);
     },
     setIsFinished: (state, action: PayloadAction<boolean>) => {
       state.isFinished = action.payload;
@@ -50,6 +49,6 @@ export const ClockSlice = createSlice({
   },
 });
 
-export const { setStartTime, setEndTime, setCurrentTime, setTotalTime, setIsRunning, setIsFinished, setClockMode, setProgressBarValue } = ClockSlice.actions;
+export const { setStartTime, setEndTime, setCurrentTime, setTotalDuration, setIsRunning, setIsFinished, setClockMode, setProgressBarValue } = ClockSlice.actions;
 
 export default ClockSlice;

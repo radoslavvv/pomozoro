@@ -1,5 +1,5 @@
 import moment from "moment";
-import { setCurrentTime, setEndTime, setIsFinished, setIsRunning, setProgressBarValue, setStartTime, setTotalTime } from "../store/features/clock/ClockSlice";
+import { setCurrentTime, setEndTime, setIsFinished, setIsRunning, setProgressBarValue, setStartTime, setTotalDuration } from "../store/features/clock/ClockSlice";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../store/Store";
@@ -9,7 +9,7 @@ import ClockService from "../services/ClockService";
 const useClock = () => {
   const dispatch = useAppDispatch();
 
-  const totalTime: moment.Duration = useSelector((state: RootState) => state.clock.totalTime);
+  const totalDuration: moment.Duration = useSelector((state: RootState) => state.clock.totalDuration);
 
   const startTime: any = useSelector((state: RootState) => state.clock.startTime);
   const endTime: any = useSelector((state: RootState) => state.clock.endTime);
@@ -36,10 +36,11 @@ const useClock = () => {
 
   const updateClock = (): void => {
     if (isRunning) {
-      dispatch(setCurrentTime(currentTime));
+      // dispatch(setCurrentTime(currentTime));
 
       setTimeout(() => {
-        dispatch(setStartTime(moment(startTime).add(1, "second")));
+        const newStartTime = moment(startTime).add(1, "second");
+        dispatch(setStartTime(newStartTime));
       }, 1000);
 
       if (currentTime.minutes() <= 0 && currentTime.seconds() <= 0) {
@@ -51,8 +52,8 @@ const useClock = () => {
 
   const updateProgressBar = (): void => {
     if (isRunning) {
-      const untilEnd = moment.duration(endTime.diff(moment()));
-      const timePercentage: number = ((totalTime.asMilliseconds() - untilEnd.asMilliseconds()) * 100) / totalTime.asMilliseconds();
+      const durationUntilEnd: moment.Duration = moment.duration(endTime.diff(moment()));
+      const timePercentage: number = ((totalDuration.asMilliseconds() - durationUntilEnd.asMilliseconds()) * 100) / totalDuration.asMilliseconds();
 
       setTimeout(() => {
         dispatch(setProgressBarValue((timePercentage / 100) * 900));
@@ -61,21 +62,21 @@ const useClock = () => {
   };
 
   const startClock = (): void => {
-    let currentEndTime: moment.Moment;
-    let currentStartTime: moment.Moment;
+    let newEndTime: moment.Moment;
+    let newStartTime: moment.Moment;
+
     if (isFinished) {
-      currentStartTime = moment();
-      dispatch(setStartTime(currentStartTime));
+      newStartTime = moment();
+      dispatch(setStartTime(newStartTime));
 
-      currentEndTime = moment().add(clockMinutes, "minute");
-      dispatch(setEndTime(currentEndTime));
+      newEndTime = moment().add(clockMinutes, "minute");
+      dispatch(setEndTime(newEndTime));
 
-      const totalTime = moment.duration(currentEndTime.diff(currentStartTime));
-      dispatch(setTotalTime(totalTime));
-      console.log("total time is set: ", totalTime.milliseconds());
+      const newTotalDuration = moment.duration(newEndTime.diff(newStartTime));
+      dispatch(setTotalDuration(newTotalDuration));
     } else {
-      currentEndTime = endTime;
-      currentStartTime = startTime;
+      newEndTime = endTime;
+      newStartTime = startTime;
     }
 
     dispatch(setIsRunning(true));

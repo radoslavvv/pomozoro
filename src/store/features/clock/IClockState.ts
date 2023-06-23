@@ -8,7 +8,7 @@ export interface IClockState {
   endTime: any;
 
   currentTime: any;
-  totalTime: any;
+  totalDuration: any;
 
   progressBarValue: any;
 
