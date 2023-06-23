@@ -3,7 +3,7 @@ import ClockMode from "../../../shared/enums/ClockMode";
 import { IOptionsState } from "./IOptionsSlice";
 
 const initialState: IOptionsState = {
-  pomodoroMinutes: 15,
+  pomodoroMinutes: 1,
   shortBreakMinutes: 5,
   longBreakMinutes: 15,
 };

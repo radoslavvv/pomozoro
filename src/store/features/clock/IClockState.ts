@@ -10,5 +10,7 @@ export interface IClockState {
   currentTime: any;
   totalTime: any;
 
+  progressBarValue: any;
+
   clockMode: ClockMode;
 }
