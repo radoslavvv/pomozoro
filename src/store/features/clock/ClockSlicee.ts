@@ -1,7 +1,8 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IClockState } from "./IClockState";
 import moment from "moment";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
 import ClockMode from "../../../shared/enums/ClockMode";
+import { IClockState } from "./IClockState";
 
 const initialState: IClockState = {
 	isRunning: false,

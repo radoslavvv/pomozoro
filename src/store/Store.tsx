@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
-import ClockSlice from "./features/clock/ClockSlice";
+import ClockSlice from "./features/clock/ClockSlicee.ts";
 import OptionsSlice from "./features/options/OptionsSlice";
 
 const store = configureStore({
