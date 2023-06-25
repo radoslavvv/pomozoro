@@ -1,42 +1,32 @@
 import moment from "moment";
 import {
 	pause,
-	setCurrentTime,
 	setEndTime,
 	setIsFinished,
 	setIsRunning,
 	setProgressBarValue,
 	setStartTime,
 	setTotalDuration,
+	setCurrentDuration,
 } from "../store/features/clock/ClockSlicee.ts";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { RootState, useAppDispatch } from "../store/Store";
+import store, { RootState, useAppDispatch } from "../store/Store";
 import ClockMode from "../shared/enums/ClockMode";
 import ClockService from "../services/ClockService";
 
 const useClock = () => {
 	const dispatch = useAppDispatch();
 
-	const totalDuration: moment.Duration = useSelector(
+	const totalDuration: moment.Duration | any = useSelector(
 		(state: RootState) => state.clock.totalDuration
 	);
 
-	const startTime: any = useSelector(
-		(state: RootState) => state.clock.startTime
+	const currentDuration: moment.Duration | any = useSelector(
+		(state: RootState) => state.clock.currentDuration
 	);
-	const endTime: any = useSelector((state: RootState) => state.clock.endTime);
 
-	const currentTime: any =
-		endTime && startTime ? moment.duration(endTime.diff(startTime)) : null;
-	const currentTimeMinutes =
-		currentTime &&
-		Math.abs(currentTime.minutes())?.toString()?.padStart(2, "0");
-	const currentTimeSeconds =
-		currentTime &&
-		Math.abs(currentTime.seconds())?.toString()?.padStart(2, "0");
-
-	const progressBarValue: any = useSelector(
+	const progressBarValue: number = useSelector(
 		(state: RootState) => state.clock.progressBarValue
 	);
 
@@ -53,45 +43,49 @@ const useClock = () => {
 	const clockMinutes: number =
 		ClockService.getCurrentClockModeMinutes(currentClockMode);
 
-	const clockFormattedCurrentTime = currentTime ? (
+	const clockFormattedCurrentTime: string | JSX.Element = currentDuration ? (
 		<>
-			{currentTimeMinutes}:{currentTimeSeconds}
+			{currentDuration.minutes().toString().padStart(2, "0")}:
+			{currentDuration.seconds().toString().padStart(2, "0")}
 		</>
 	) : (
 		`${clockMinutes.toString().padStart(2, "0")}:00`
 	);
 
 	const updateClock = (): void => {
-		if (isRunning) {
-			// dispatch(setCurrentTime(currentTime));
+		setTimeout(() => {
+			if (store.getState().clock.isRunning) {
+				const newDuration: moment.Duration = moment
+					.duration(currentDuration)
+					.add(-0.1, "seconds");
 
-			setTimeout(() => {
-				const newStartTime = moment(startTime).add(1, "second");
-				dispatch(setStartTime(newStartTime));
-			}, 1000);
-
-			if (currentTime.minutes() <= 0 && currentTime.seconds() <= 0) {
-				dispatch(setIsRunning(false));
-				dispatch(setIsFinished(true));
+				if (
+					currentDuration.minutes() <= 0 &&
+					currentDuration.seconds() <= 0
+				) {
+					dispatch(setIsRunning(false));
+					dispatch(setIsFinished(true));
+				} else {
+					dispatch(setCurrentDuration(newDuration));
+				}
 			}
-		}
+		}, 100);
 	};
 
 	const updateProgressBar = (): void => {
-		if (isRunning) {
-			const durationUntilEnd: moment.Duration = moment.duration(
-				endTime.diff(moment())
-			);
+		setTimeout(() => {
 			const timePercentage: number =
 				((totalDuration.asMilliseconds() -
-					durationUntilEnd.asMilliseconds()) *
+					currentDuration.asMilliseconds()) *
 					100) /
 				totalDuration.asMilliseconds();
 
-			setTimeout(() => {
-				dispatch(setProgressBarValue((timePercentage / 100) * 900));
-			}, 100);
-		}
+			const newProgressBarValue: number = (timePercentage / 100) * 900;
+
+			if (store.getState().clock.isRunning) {
+				dispatch(setProgressBarValue(newProgressBarValue));
+			}
+		}, 100);
 	};
 
 	const startClock = (): void => {
@@ -108,10 +102,9 @@ const useClock = () => {
 			const newTotalDuration = moment.duration(
 				newEndTime.diff(newStartTime)
 			);
+
 			dispatch(setTotalDuration(newTotalDuration));
-		} else {
-			newEndTime = endTime;
-			newStartTime = startTime;
+			dispatch(setCurrentDuration(newTotalDuration));
 		}
 
 		dispatch(setIsRunning(true));
@@ -140,13 +133,13 @@ const useClock = () => {
 		if (isRunning) {
 			updateProgressBar();
 		}
-	}, [isRunning, progressBarValue]);
+	}, [isRunning, progressBarValue, currentDuration]);
 
 	useEffect(() => {
 		if (isRunning) {
 			updateClock();
 		}
-	}, [isRunning, startTime]);
+	}, [isRunning, currentDuration]);
 
 	return {
 		clockButtonClickHandler,

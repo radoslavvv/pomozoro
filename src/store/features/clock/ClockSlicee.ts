@@ -11,7 +11,7 @@ const initialState: IClockState = {
 	startTime: null,
 	endTime: null,
 
-	currentTime: null,
+	currentDuration: null,
 	totalDuration: null,
 
 	progressBarValue: 0,
@@ -23,16 +23,16 @@ export const ClockSlice = createSlice({
 	name: "clock",
 	initialState,
 	reducers: {
-		setStartTime: (state, action: PayloadAction<any>) => {
+		setStartTime: (state, action: PayloadAction<moment.Moment>) => {
 			state.startTime = moment(action.payload);
 		},
-		setEndTime: (state, action: PayloadAction<any>) => {
+		setEndTime: (state, action: PayloadAction<moment.Moment>) => {
 			state.endTime = moment(action.payload);
 		},
-		setCurrentTime: (state, action: PayloadAction<any>) => {
-			state.currentTime = action.payload;
+		setCurrentDuration: (state, action: PayloadAction<moment.Duration>) => {
+			state.currentDuration = action.payload;
 		},
-		setTotalDuration: (state, action: PayloadAction<any>) => {
+		setTotalDuration: (state, action: PayloadAction<moment.Duration>) => {
 			state.totalDuration = action.payload;
 		},
 		setIsRunning: (state, action: PayloadAction<boolean>) => {
@@ -44,7 +44,7 @@ export const ClockSlice = createSlice({
 		setClockMode: (state, action: PayloadAction<ClockMode>) => {
 			state.clockMode = action.payload;
 		},
-		setProgressBarValue: (state, action: PayloadAction<any>) => {
+		setProgressBarValue: (state, action: PayloadAction<number>) => {
 			state.progressBarValue = action.payload;
 		},
 		pause: (state) => {
@@ -56,7 +56,7 @@ export const ClockSlice = createSlice({
 
 			state.startTime = null;
 			state.endTime = null;
-			state.currentTime = null;
+			state.currentDuration = null;
 
 			state.totalDuration = null;
 
@@ -68,7 +68,7 @@ export const ClockSlice = createSlice({
 export const {
 	setStartTime,
 	setEndTime,
-	setCurrentTime,
+	setCurrentDuration,
 	setTotalDuration,
 	setIsRunning,
 	setIsFinished,

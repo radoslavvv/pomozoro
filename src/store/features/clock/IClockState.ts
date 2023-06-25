@@ -1,16 +1,16 @@
 import ClockMode from "../../../shared/enums/ClockMode";
 
 export interface IClockState {
-  isRunning: boolean;
-  isFinished: boolean;
+	isRunning: boolean;
+	isFinished: boolean;
 
-  startTime: any;
-  endTime: any;
+	startTime: moment.Moment | any;
+	endTime: moment.Moment | any;
 
-  currentTime: any;
-  totalDuration: any;
+	currentDuration: moment.Duration | any;
+	totalDuration: moment.Duration | any;
 
-  progressBarValue: any;
+	progressBarValue: number;
 
-  clockMode: ClockMode;
+	clockMode: ClockMode;
 }
