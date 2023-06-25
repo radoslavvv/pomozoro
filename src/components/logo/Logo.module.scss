@@ -17,6 +17,8 @@
 	transition-duration: 0.3s;
 	user-select: none;
 
+	animation: slideDownSlow 0.2s ease-in-out;
+
 	@include mobile {
 		margin: 25px auto;
 	}
