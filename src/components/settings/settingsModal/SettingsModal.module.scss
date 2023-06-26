@@ -1,7 +1,7 @@
 @use "../../../shared/styles/" as *;
 
 .settingsModalOverlay {
-	position: absolute;
+	position: fixed;
 	top: 0px;
 	left: 0px;
 
@@ -20,11 +20,19 @@
 		position: relative;
 
 		width: 600px;
-		height: 500px;
+		// height: 500px;
 
 		border-radius: 30px;
 
 		background: white;
+
+		@include mobile {
+			max-width: 90vw;
+			max-height: 100vh;
+			min-height: 150px;
+
+			height: 60vh;
+		}
 
 		&__header {
 			display: flex;
@@ -64,6 +72,7 @@
 
 		&__sections {
 			padding: 0px 35px;
+			padding-bottom: 45px;
 
 			.sectionLabel {
 				padding-top: 35px;
@@ -75,6 +84,16 @@
 				font-size: 17px;
 				font-weight: bold;
 				letter-spacing: 5px;
+
+				@include mobile {
+					padding: 0px;
+
+					margin-bottom: 25px;
+				}
+			}
+
+			.timeSection {
+				padding-bottom: 25px;
 			}
 
 			.fontSection {
@@ -84,6 +103,13 @@
 
 				border-top: 1px solid $veryLightGray;
 				border-bottom: 1px solid $veryLightGray;
+
+				@include mobile {
+					display: flex;
+					flex-direction: column;
+
+					padding: 25px;
+				}
 
 				.fontOptions {
 					display: flex;
@@ -106,6 +132,13 @@
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
+
+				@include mobile {
+					display: flex;
+					flex-direction: column;
+
+					padding: 25px;
+				}
 
 				.colorOptions {
 					display: flex;

@@ -6,6 +6,10 @@ const initialState: ISettingsState = {
 	pomodoroMinutes: 1,
 	shortBreakMinutes: 5,
 	longBreakMinutes: 15,
+
+	modalIsOpen: false,
+	// selectedColor:
+	// selectedFont:
 };
 
 export const SettingsSlice = createSlice({
@@ -15,9 +19,12 @@ export const SettingsSlice = createSlice({
 		setClockMode: (state, action: PayloadAction<ClockMode>) => {
 			//   state.clockMode = action.payload;
 		},
+		setModalIsOpen: (state, action: PayloadAction<boolean>) => {
+			state.modalIsOpen = action.payload;
+		},
 	},
 });
 
-export const { setClockMode } = SettingsSlice.actions;
+export const { setClockMode, setModalIsOpen } = SettingsSlice.actions;
 
 export default SettingsSlice;

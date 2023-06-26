@@ -1,6 +1,8 @@
 @use "../../shared/styles/" as *;
 
 .settings {
+	position: relative;
+
 	opacity: 0;
 
 	animation: slideDown 0.75s ease-in-out forwards;
