@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
-import ClockSlice from "./features/clock/ClockSlicee.ts";
-import OptionsSlice from "./features/options/OptionsSlice";
+import ClockSlice from "./features/clock/ClockSlice.ts";
+import SettingsSlice from "./features/settings/SettingsSlice.ts";
 
 const store = configureStore({
 	reducer: {
 		clock: ClockSlice.reducer,
-		options: OptionsSlice.reducer,
+		settings: SettingsSlice.reducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({

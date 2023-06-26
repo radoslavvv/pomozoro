@@ -1,6 +1,6 @@
 @use "../../shared/styles/" as *;
 
-.options {
+.settings {
 	opacity: 0;
 
 	position: relative;
@@ -8,7 +8,7 @@
 	animation: slideDown 0.75s ease-in-out forwards;
 	animation-delay: 1s;
 
-	.optionsButton {
+	.settingsButton {
 		margin-top: 45px;
 
 		color: $lightGray;

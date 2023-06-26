@@ -4,7 +4,7 @@ import Logo from "./logo/Logo";
 import styles from "./App.module.scss";
 import Clock from "./clock/Clock";
 import ModeSlider from "./modeSlider/ModeSlider";
-import Options from "./options/Options";
+import Settings from "./settings/Settings";
 
 function App() {
 	return (
@@ -12,7 +12,7 @@ function App() {
 			<Logo />
 			<ModeSlider />
 			<Clock />
-			<Options />
+			<Settings />
 		</div>
 	);
 }

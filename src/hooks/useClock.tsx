@@ -8,7 +8,7 @@ import {
 	setStartTime,
 	setTotalDuration,
 	setCurrentDuration,
-} from "../store/features/clock/ClockSlicee.ts";
+} from "../store/features/clock/ClockSlice.ts";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import store, { RootState, useAppDispatch } from "../store/Store";

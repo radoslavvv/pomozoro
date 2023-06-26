@@ -8,7 +8,7 @@ import {
 	pause,
 	reset,
 	setClockMode,
-} from "../../store/features/clock/ClockSlicee.ts";
+} from "../../store/features/clock/ClockSlice.ts";
 
 const ModeSlider = (props: IModeSliderProps) => {
 	const dispatch = useAppDispatch();
