@@ -1,0 +1,49 @@
+@use "../../../../shared/styles/" as *;
+
+.colorOptions {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 15px;
+
+	.colorOption {
+		width: 50px;
+		height: 50px;
+
+		border-radius: 25px;
+
+		background: $lightGray;
+
+		cursor: pointer;
+		user-select: none;
+
+		transition-duration: 0.5s;
+
+		&:hover {
+			transform: scale(1.05);
+		}
+
+		&:active {
+			transform: scale(0.95);
+		}
+
+		&.active {
+			&:before {
+				content: "✓";
+
+				display: flex;
+				justify-content: center;
+				align-items: center;
+
+				height: 100%;
+
+				color: $popupMainFontColor;
+
+				font-size: 25px;
+				font-weight: bold;
+
+				animation: fadeIn 0.3s ease-in-out;
+			}
+		}
+	}
+}

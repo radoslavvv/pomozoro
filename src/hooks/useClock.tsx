@@ -40,8 +40,32 @@ const useClock = () => {
 	const currentClockMode: ClockMode = useSelector(
 		(state: RootState) => state.clock.clockMode
 	);
-	const clockMinutes: number =
-		ClockService.getCurrentClockModeMinutes(currentClockMode);
+
+	const pomodoroMinutes: number = useSelector(
+		(state: RootState) => state.settings.pomodoroMinutes
+	);
+
+	const shortBreakMinutes: number = useSelector(
+		(state: RootState) => state.settings.shortBreakMinutes
+	);
+
+	const longBreakMinutes: number = useSelector(
+		(state: RootState) => state.settings.longBreakMinutes
+	);
+
+	const getCurrentClockModeMinutes = (currentClockMode: ClockMode) => {
+		if (currentClockMode === ClockMode.Pomodoro) {
+			return pomodoroMinutes;
+		} else if (currentClockMode === ClockMode.ShortBreak) {
+			return shortBreakMinutes;
+		} else if (currentClockMode === ClockMode.LongBreak) {
+			return longBreakMinutes;
+		}
+
+		return 0;
+	};
+
+	const clockMinutes: number = getCurrentClockModeMinutes(currentClockMode);
 
 	const clockFormattedCurrentTime: string | JSX.Element = currentDuration ? (
 		<>

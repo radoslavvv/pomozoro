@@ -52,7 +52,6 @@
 
 		&.selected {
 			color: $darkBlue;
-			background: $loaderColor;
 
 			animation: fadeIn 0.65s ease-in-out;
 			&:hover {

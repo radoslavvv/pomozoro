@@ -4,10 +4,15 @@ import IProgressBarProps from "./IProgressBarProps";
 import styles from "./ProgressBar.module.scss";
 import { RootState, useAppDispatch } from "../../../store/Store";
 import { useSelector } from "react-redux";
+import Color from "../../../shared/enums/Color";
 
 const ProgressBar = (props: IProgressBarProps) => {
 	const progressBarValue: any = useSelector(
 		(state: RootState) => state.clock.progressBarValue
+	);
+
+	const color: Color = useSelector(
+		(state: RootState) => state.settings.color
 	);
 
 	return (
@@ -24,7 +29,10 @@ const ProgressBar = (props: IProgressBarProps) => {
 							cy="175"
 							r="145"
 							strokeLinecap="round"
-							style={{ strokeDashoffset: progressBarValue }}
+							style={{
+								strokeDashoffset: progressBarValue,
+								stroke: color,
+							}}
 						></circle>
 					)}
 				</svg>

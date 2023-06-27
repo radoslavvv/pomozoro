@@ -1,18 +1,33 @@
-import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../../store/Store";
-import { setModalIsOpen } from "../../../store/features/settings/SettingsSlice";
+import {
+	applyChanges,
+	setModalIsOpen,
+} from "../../../store/features/settings/SettingsSlice";
 import ISettingsModalProps from "./ISettingsModalProps";
 
 import styles from "./SettingsModal.module.scss";
-import TimeInputs from "./inputBoxes/TimeInputs";
+import TimeInputs from "./timeInputs/TimeInputs";
+import FontOptions from "./fontOptions/FontOptions";
+import ColorOptions from "./colorOptions/ColorOptions";
+import Color from "../../../shared/enums/Color";
+import { useSelector } from "react-redux";
 
 const SettingsModal = (props: ISettingsModalProps) => {
 	const dispatch = useAppDispatch();
+
+	const color: Color = useSelector(
+		(state: RootState) => state.settings.color
+	);
 
 	const closeButtonClickHandler = (): void => {
 		// setTimeout(() => {
 		dispatch(setModalIsOpen(false));
 		// }, 1000);
+	};
+
+	const applyButtonClickHandler = (): void => {
+		dispatch(applyChanges());
+		dispatch(setModalIsOpen(false));
 	};
 
 	return (
@@ -34,22 +49,19 @@ const SettingsModal = (props: ISettingsModalProps) => {
 					</div>
 					<div className={styles.fontSection}>
 						<p className={styles.sectionLabel}>FONT</p>
-						<div className={styles.fontOptions}>
-							<div className={styles.fontOption}></div>
-							<div className={styles.fontOption}></div>
-							<div className={styles.fontOption}></div>
-						</div>
+						<FontOptions />
 					</div>
 					<div className={styles.colorSection}>
 						<p className={styles.sectionLabel}>COLOR</p>
-						<div className={styles.colorOptions}>
-							<div className={styles.colorOption}></div>
-							<div className={styles.colorOption}></div>
-							<div className={styles.colorOption}></div>
-						</div>
+						<ColorOptions />
 					</div>
 				</div>
-				<button>Apply</button>
+				<button
+					onClick={applyButtonClickHandler}
+					style={{ background: color }}
+				>
+					Apply
+				</button>
 			</div>
 		</div>
 	);

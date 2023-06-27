@@ -9,6 +9,7 @@ import {
 	reset,
 	setClockMode,
 } from "../../store/features/clock/ClockSlice.ts";
+import Color from "../../shared/enums/Color.ts";
 
 const ModeSlider = (props: IModeSliderProps) => {
 	const dispatch = useAppDispatch();
@@ -17,26 +18,33 @@ const ModeSlider = (props: IModeSliderProps) => {
 		(state: RootState) => state.clock.clockMode
 	);
 
+	const color: Color = useSelector(
+		(state: RootState) => state.settings.color
+	);
+
 	const modeClickHandler = (clockMode: ClockMode) => {
 		dispatch(setClockMode(clockMode));
 		dispatch(reset());
 	};
 
 	const clockModeIsSelected = (optionClockMode: ClockMode) => {
-		if (optionClockMode === clockMode) {
-			return styles.selected;
-		} else {
-			return "";
-		}
+		return optionClockMode === clockMode;
 	};
 
 	return (
 		<div className={styles.modeSlider}>
 			<div
 				onClick={() => modeClickHandler(ClockMode.Pomodoro)}
-				className={`${styles.modeSlider__option} ${clockModeIsSelected(
-					ClockMode.Pomodoro
-				)}`}
+				className={`${styles.modeSlider__option} ${
+					clockModeIsSelected(ClockMode.Pomodoro)
+						? styles.selected
+						: ""
+				}`}
+				style={{
+					background: clockModeIsSelected(ClockMode.Pomodoro)
+						? color
+						: "",
+				}}
 			>
 				pomodoro
 			</div>
@@ -45,6 +53,11 @@ const ModeSlider = (props: IModeSliderProps) => {
 				className={`${styles.modeSlider__option} ${clockModeIsSelected(
 					ClockMode.ShortBreak
 				)}`}
+				style={{
+					background: clockModeIsSelected(ClockMode.ShortBreak)
+						? color
+						: "",
+				}}
 			>
 				short break
 			</div>
@@ -53,6 +66,11 @@ const ModeSlider = (props: IModeSliderProps) => {
 				className={`${styles.modeSlider__option} ${clockModeIsSelected(
 					ClockMode.LongBreak
 				)}`}
+				style={{
+					background: clockModeIsSelected(ClockMode.LongBreak)
+						? color
+						: "",
+				}}
 			>
 				long break
 			</div>
