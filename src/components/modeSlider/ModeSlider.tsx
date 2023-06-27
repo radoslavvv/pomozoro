@@ -10,6 +10,7 @@ import {
 	setClockMode,
 } from "../../store/features/clock/ClockSlice.ts";
 import Color from "../../shared/enums/Color.ts";
+import FontType from "../../shared/enums/FontType.ts";
 
 const ModeSlider = (props: IModeSliderProps) => {
 	const dispatch = useAppDispatch();
@@ -22,6 +23,10 @@ const ModeSlider = (props: IModeSliderProps) => {
 		(state: RootState) => state.settings.color
 	);
 
+	const fontType: FontType = useSelector(
+		(state: RootState) => state.settings.fontType
+	);
+
 	const modeClickHandler = (clockMode: ClockMode) => {
 		dispatch(setClockMode(clockMode));
 		dispatch(reset());
@@ -32,7 +37,7 @@ const ModeSlider = (props: IModeSliderProps) => {
 	};
 
 	return (
-		<div className={styles.modeSlider}>
+		<div className={styles.modeSlider} style={{ fontFamily: fontType }}>
 			<div
 				onClick={() => modeClickHandler(ClockMode.Pomodoro)}
 				className={`${styles.modeSlider__option} ${

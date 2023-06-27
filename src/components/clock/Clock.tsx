@@ -4,9 +4,16 @@ import ProgressBar from "./progressBar/ProgressBar";
 import styles from "./Clock.module.scss";
 import useClock from "../../hooks/useClock";
 import ClockButton from "./clockButton/ClockButton";
+import FontType from "../../shared/enums/FontType";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/Store";
 
 const Clock = (props: IClockProps) => {
 	const { clockButtonClickHandler, clockFormattedCurrentTime } = useClock();
+
+	const fontType: FontType = useSelector(
+		(state: RootState) => state.settings.fontType
+	);
 
 	return (
 		<div className={styles.clockContainer}>
@@ -14,7 +21,10 @@ const Clock = (props: IClockProps) => {
 				<div className={styles.innerCircle}>
 					<ProgressBar />
 					<div className={styles.face}>
-						<span className={styles.time}>
+						<span
+							className={styles.time}
+							style={{ fontFamily: fontType }}
+						>
 							{clockFormattedCurrentTime}
 						</span>
 						<ClockButton />

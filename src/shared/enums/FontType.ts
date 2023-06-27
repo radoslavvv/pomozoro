@@ -1,7 +1,7 @@
 enum FontType {
 	Poppins = "Poppins",
-	Pacifico = "Pacifico",
-	Comforter = "Comforter",
+	Orbitron = "Orbitron",
+	BlackOpsOne = "Black Ops One",
 }
 
 export default FontType;

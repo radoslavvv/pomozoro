@@ -1,10 +1,26 @@
+@use "../../../shared/styles/" as *;
+
 .clockButton {
 	border: none;
 
 	background: none;
-	color: white;
+	color: $white;
 
-	letter-spacing: 15px;
+	letter-spacing: 6px;
 
+	margin-right: -6px;
 	z-index: 2;
+
+	font-size: 17px;
+
+	cursor: pointer;
+
+	transition-duration: 0.5s;
+
+	&:hover {
+		letter-spacing: 10px;
+
+		margin-right: -10px;
+	}
+	// font-size: 19px;
 }

@@ -32,23 +32,25 @@ const FontOptions = (props: IFontOptionsProps) => {
 			</div>
 			<div
 				className={`${styles.fontOption} ${
-					currentFontType === FontType.Pacifico ? styles.active : ""
+					currentFontType === FontType.Orbitron ? styles.active : ""
 				}`}
 				style={{
-					fontFamily: FontType.Pacifico.toString(),
+					fontFamily: FontType.Orbitron.toString(),
 				}}
-				onClick={() => changeCurrentFont(FontType.Pacifico)}
+				onClick={() => changeCurrentFont(FontType.Orbitron)}
 			>
 				Aa
 			</div>
 			<div
 				className={`${styles.fontOption} ${
-					currentFontType === FontType.Comforter ? styles.active : ""
+					currentFontType === FontType.BlackOpsOne
+						? styles.active
+						: ""
 				}`}
 				style={{
-					fontFamily: FontType.Comforter.toString(),
+					fontFamily: FontType.BlackOpsOne.toString(),
 				}}
-				onClick={() => changeCurrentFont(FontType.Comforter)}
+				onClick={() => changeCurrentFont(FontType.BlackOpsOne)}
 			>
 				Aa
 			</div>

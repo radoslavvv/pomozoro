@@ -11,12 +11,17 @@ import FontOptions from "./fontOptions/FontOptions";
 import ColorOptions from "./colorOptions/ColorOptions";
 import Color from "../../../shared/enums/Color";
 import { useSelector } from "react-redux";
+import FontType from "../../../shared/enums/FontType";
 
 const SettingsModal = (props: ISettingsModalProps) => {
 	const dispatch = useAppDispatch();
 
 	const color: Color = useSelector(
 		(state: RootState) => state.settings.color
+	);
+
+	const fontType: FontType = useSelector(
+		(state: RootState) => state.settings.fontType
 	);
 
 	const closeButtonClickHandler = (): void => {
@@ -31,7 +36,10 @@ const SettingsModal = (props: ISettingsModalProps) => {
 	};
 
 	return (
-		<div className={styles.settingsModalOverlay}>
+		<div
+			className={styles.settingsModalOverlay}
+			style={{ fontFamily: fontType }}
+		>
 			<div className={styles.settingsModal}>
 				<div className={styles.settingsModal__header}>
 					<h3>Settings</h3>
@@ -58,7 +66,7 @@ const SettingsModal = (props: ISettingsModalProps) => {
 				</div>
 				<button
 					onClick={applyButtonClickHandler}
-					style={{ background: color }}
+					style={{ background: color, fontFamily: fontType }}
 				>
 					Apply
 				</button>
