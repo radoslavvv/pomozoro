@@ -5,6 +5,10 @@
 	justify-content: space-between;
 	align-items: center;
 
+	@include mobile {
+		align-items: flex-end;
+	}
+
 	.timeInputContainer {
 		display: flex;
 		justify-content: center;
@@ -19,6 +23,10 @@
 			color: $fadedLightGray;
 
 			font-size: 12px;
+
+			@include mobile {
+				font-size: 11px;
+			}
 		}
 
 		input {

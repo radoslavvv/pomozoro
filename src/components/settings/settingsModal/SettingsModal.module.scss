@@ -28,10 +28,10 @@
 
 		@include mobile {
 			max-width: 90vw;
-			max-height: 100vh;
+			max-height: 70vh;
 			min-height: 150px;
-
-			height: 60vh;
+			/* max-height: 95vh; */
+			height: 100%;
 		}
 
 		&__header {
@@ -73,6 +73,9 @@
 		&__sections {
 			padding: 0px 35px;
 			padding-bottom: 45px;
+			/* max-height: 95vh; */
+			overflow: scroll;
+			height: 62%;
 
 			.sectionLabel {
 				padding-top: 35px;
@@ -94,6 +97,10 @@
 
 			.timeSection {
 				padding-bottom: 25px;
+
+				@include mobile {
+					margin-top: 25px;
+				}
 			}
 
 			.fontSection {
@@ -149,6 +156,11 @@
 			cursor: pointer;
 
 			transition-duration: 0.3s;
+
+			@include mobile {
+				margin-bottom: 0px;
+				margin-top: 20px;
+			}
 
 			&:hover {
 				transform: scale(1.03);
