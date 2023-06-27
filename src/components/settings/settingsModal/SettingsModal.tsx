@@ -64,12 +64,14 @@ const SettingsModal = (props: ISettingsModalProps) => {
 						<ColorOptions />
 					</div>
 				</div>
-				<button
-					onClick={applyButtonClickHandler}
-					style={{ background: color, fontFamily: fontType }}
-				>
-					Apply
-				</button>
+				<div className={styles.buttonSection}>
+					<button
+						onClick={applyButtonClickHandler}
+						style={{ background: color, fontFamily: fontType }}
+					>
+						Apply
+					</button>
+				</div>
 			</div>
 		</div>
 	);
