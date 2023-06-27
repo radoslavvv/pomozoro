@@ -55,9 +55,11 @@ const ModeSlider = (props: IModeSliderProps) => {
 			</div>
 			<div
 				onClick={() => modeClickHandler(ClockMode.ShortBreak)}
-				className={`${styles.modeSlider__option} ${clockModeIsSelected(
-					ClockMode.ShortBreak
-				)}`}
+				className={`${styles.modeSlider__option} ${
+					clockModeIsSelected(ClockMode.ShortBreak)
+						? styles.selected
+						: ""
+				}`}
 				style={{
 					background: clockModeIsSelected(ClockMode.ShortBreak)
 						? color
@@ -68,9 +70,11 @@ const ModeSlider = (props: IModeSliderProps) => {
 			</div>
 			<div
 				onClick={() => modeClickHandler(ClockMode.LongBreak)}
-				className={`${styles.modeSlider__option} ${clockModeIsSelected(
-					ClockMode.LongBreak
-				)}`}
+				className={`${styles.modeSlider__option} ${
+					clockModeIsSelected(ClockMode.LongBreak)
+						? styles.selected
+						: ""
+				}`}
 				style={{
 					background: clockModeIsSelected(ClockMode.LongBreak)
 						? color

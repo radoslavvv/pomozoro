@@ -81,7 +81,10 @@
 			/* max-height: 95vh; */
 			// overflow: scroll;
 			// height: 62%;
-			overflow: scroll;
+
+			@include mobile {
+				overflow: scroll;
+			}
 
 			.sectionLabel {
 				padding-top: 35px;

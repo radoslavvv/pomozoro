@@ -16,6 +16,9 @@ const initialState: IClockState = {
 
 	progressBarValue: 0,
 
+	pomodoroCount: 0,
+	shortBreaksCount: 0,
+
 	clockMode: ClockMode.Pomodoro,
 };
 
@@ -50,6 +53,29 @@ export const ClockSlice = createSlice({
 		pause: (state) => {
 			state.isRunning = false;
 		},
+		finish: (state) => {
+			state.isFinished = true;
+			state.isRunning = false;
+
+			if (state.clockMode === ClockMode.Pomodoro) {
+				state.pomodoroCount = state.pomodoroCount + 1;
+
+				state.clockMode = ClockMode.ShortBreak;
+			} else if (state.clockMode === ClockMode.ShortBreak) {
+				state.shortBreaksCount = state.shortBreaksCount + 1;
+
+				if (state.shortBreaksCount % 4 === 0) {
+					state.clockMode = ClockMode.LongBreak;
+				} else {
+					state.clockMode = ClockMode.Pomodoro;
+				}
+			} else if (state.clockMode === ClockMode.LongBreak) {
+				state.pomodoroCount = 0;
+				state.shortBreaksCount = 0;
+
+				state.clockMode = ClockMode.Pomodoro;
+			}
+		},
 		reset: (state) => {
 			state.isRunning = false;
 			state.isFinished = true;
@@ -76,6 +102,7 @@ export const {
 	setProgressBarValue,
 	pause,
 	reset,
+	finish,
 } = ClockSlice.actions;
 
 export default ClockSlice;

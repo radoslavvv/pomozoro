@@ -12,5 +12,8 @@ export interface IClockState {
 
 	progressBarValue: number;
 
+	pomodoroCount: number;
+	shortBreaksCount: number;
+
 	clockMode: ClockMode;
 }

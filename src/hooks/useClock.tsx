@@ -8,6 +8,8 @@ import {
 	setStartTime,
 	setTotalDuration,
 	setCurrentDuration,
+	finish,
+	reset,
 } from "../store/features/clock/ClockSlice.ts";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -87,8 +89,8 @@ const useClock = () => {
 					currentDuration.minutes() <= 0 &&
 					currentDuration.seconds() <= 0
 				) {
-					dispatch(setIsRunning(false));
-					dispatch(setIsFinished(true));
+					dispatch(reset());
+					dispatch(finish());
 				} else {
 					dispatch(setCurrentDuration(newDuration));
 				}
