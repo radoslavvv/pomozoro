@@ -15,6 +15,10 @@ import FontType from "../../shared/enums/FontType.ts";
 const ModeSlider = (props: IModeSliderProps) => {
 	const dispatch = useAppDispatch();
 
+	const modalIsOpen: any = useSelector(
+		(state: RootState) => state.settings.modalIsOpen
+	);
+
 	const clockMode: any = useSelector(
 		(state: RootState) => state.clock.clockMode
 	);
@@ -37,7 +41,10 @@ const ModeSlider = (props: IModeSliderProps) => {
 	};
 
 	return (
-		<div className={styles.modeSlider} style={{ fontFamily: fontType }}>
+		<div
+			className={styles.modeSlider}
+			style={{ fontFamily: fontType, zIndex: modalIsOpen ? 0 : 1 }}
+		>
 			<div
 				onClick={() => modeClickHandler(ClockMode.Pomodoro)}
 				className={`${styles.modeSlider__option} ${
