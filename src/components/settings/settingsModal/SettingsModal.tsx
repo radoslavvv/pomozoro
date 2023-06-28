@@ -6,7 +6,7 @@ import {
 import ISettingsModalProps from "./ISettingsModalProps";
 
 import styles from "./SettingsModal.module.scss";
-import TimeInputs from "./timeInputs/TimeInputs";
+import TimeOptions from "./timeOptions/TimeInputs";
 import FontOptions from "./fontOptions/FontOptions";
 import ColorOptions from "./colorOptions/ColorOptions";
 import Color from "../../../shared/enums/Color";
@@ -53,7 +53,7 @@ const SettingsModal = (props: ISettingsModalProps) => {
 				<div className={styles.settingsModal__sections}>
 					<div className={styles.timeSection}>
 						<p className={styles.sectionLabel}>TIME (MINUTES)</p>
-						<TimeInputs />
+						<TimeOptions />
 					</div>
 					<div className={styles.fontSection}>
 						<p className={styles.sectionLabel}>FONT</p>

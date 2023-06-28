@@ -4,7 +4,7 @@ import FontType from "../../../shared/enums/FontType";
 import Color from "../../../shared/enums/Color";
 
 const initialState: ISettingsState = {
-	pomodoroMinutes: 1,
+	pomodoroMinutes: 25,
 	shortBreakMinutes: 5,
 	longBreakMinutes: 15,
 	fontType: FontType.Poppins,
@@ -57,10 +57,6 @@ export const SettingsSlice = createSlice({
 			state.fontType = state.currentFontType;
 			state.color = state.currentColor;
 		},
-
-		// setCurrentFontType: (state, action: PayloadAction<FontType>) => {
-		// 	state.currentFontType = action.payload;
-		// },
 	},
 });
 

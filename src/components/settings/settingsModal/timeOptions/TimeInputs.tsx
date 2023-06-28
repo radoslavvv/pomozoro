@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
-import ITimeInputsProps from "./ITimeInputsProps";
+import ITimeOptionsProps from "./ITimeOptionsProps";
 
-import styles from "./TimeInputs.module.scss";
 import { RootState, useAppDispatch } from "../../../../store/Store";
 import {
 	setCurrentLongBreakMinutes,
@@ -9,7 +8,9 @@ import {
 	setCurrentShortBreakMinutes,
 } from "../../../../store/features/settings/SettingsSlice";
 
-const TimeInputs = (props: ITimeInputsProps) => {
+import styles from "./TimeOptions.module.scss";
+
+const TimeOptions = (props: ITimeOptionsProps) => {
 	const dispatch = useAppDispatch();
 
 	const currentPomodoroMinutes: string = useSelector(
@@ -27,19 +28,19 @@ const TimeInputs = (props: ITimeInputsProps) => {
 		const formattedNum = Number(num);
 
 		if (!formattedNum) {
-			return "0";
+			return "1";
 		} else if (formattedNum > 60) {
 			return "60";
 		} else if (formattedNum < 0) {
-			return "0";
+			return "1";
 		}
 
-		return formattedNum.toString();
+		return Math.round(formattedNum).toString();
 	};
 
 	return (
-		<div className={styles.timeInputs}>
-			<div className={styles.timeInputContainer}>
+		<div className={styles.timeOptions}>
+			<div className={styles.timeOptionsContainer}>
 				<label htmlFor="pomodoro">pomodoro</label>
 				<input
 					type="number"
@@ -60,7 +61,7 @@ const TimeInputs = (props: ITimeInputsProps) => {
 					}}
 				/>
 			</div>
-			<div className={styles.timeInputContainer}>
+			<div className={styles.timeOptionsContainer}>
 				<label htmlFor="pomodoro">short break</label>
 				<input
 					type="number"
@@ -81,7 +82,7 @@ const TimeInputs = (props: ITimeInputsProps) => {
 					}}
 				/>
 			</div>
-			<div className={styles.timeInputContainer}>
+			<div className={styles.timeOptionsContainer}>
 				<label htmlFor="pomodoro">long break</label>
 				<input
 					type="number"
@@ -106,4 +107,4 @@ const TimeInputs = (props: ITimeInputsProps) => {
 	);
 };
 
-export default TimeInputs;
+export default TimeOptions;

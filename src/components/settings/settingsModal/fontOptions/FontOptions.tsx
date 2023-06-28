@@ -17,39 +17,31 @@ const FontOptions = (props: IFontOptionsProps) => {
 		dispatch(setCurrentFontType(fontType));
 	};
 
+	const generateClass = (fontType: FontType) => {
+		return `${styles.fontOption} ${
+			currentFontType === fontType ? styles.active : ""
+		}`;
+	};
+
 	return (
 		<div className={styles.fontOptions}>
 			<div
-				className={`${styles.fontOption} ${
-					currentFontType === FontType.Poppins ? styles.active : ""
-				}`}
-				style={{
-					fontFamily: FontType.Poppins.toString(),
-				}}
+				className={generateClass(FontType.Poppins)}
+				style={{ fontFamily: FontType.Poppins }}
 				onClick={() => changeCurrentFont(FontType.Poppins)}
 			>
 				Aa
 			</div>
 			<div
-				className={`${styles.fontOption} ${
-					currentFontType === FontType.Orbitron ? styles.active : ""
-				}`}
-				style={{
-					fontFamily: FontType.Orbitron.toString(),
-				}}
+				className={generateClass(FontType.Orbitron)}
+				style={{ fontFamily: FontType.Orbitron }}
 				onClick={() => changeCurrentFont(FontType.Orbitron)}
 			>
 				Aa
 			</div>
 			<div
-				className={`${styles.fontOption} ${
-					currentFontType === FontType.BlackOpsOne
-						? styles.active
-						: ""
-				}`}
-				style={{
-					fontFamily: FontType.BlackOpsOne.toString(),
-				}}
+				className={generateClass(FontType.BlackOpsOne)}
+				style={{ fontFamily: FontType.BlackOpsOne }}
 				onClick={() => changeCurrentFont(FontType.BlackOpsOne)}
 			>
 				Aa

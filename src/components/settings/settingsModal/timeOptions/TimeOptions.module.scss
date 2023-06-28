@@ -1,6 +1,6 @@
 @use "../../../../shared/styles" as *;
 
-.timeInputs {
+.timeOptions {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -9,7 +9,7 @@
 		align-items: flex-end;
 	}
 
-	.timeInputContainer {
+	.timeOptionsContainer {
 		display: flex;
 		justify-content: center;
 		align-items: start;
