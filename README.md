@@ -27,6 +27,10 @@ PomoZoro provides a structured approach to work and breaks, helping you maintain
 - React
 - Redux (Redux Toolkit)
 
+### Deployed with
+
+- [Netlify](https://pomozoro.netlify.app/)
+
 ## Getting started
 
 ### Usage
