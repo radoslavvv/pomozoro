@@ -4,7 +4,7 @@ PomoZoro is a cool and simple web-based timer that implements the Pomodoro Techn
 
 <div align="center">
   <kbd>
-    <img src="https://imgur.com/a/JjW5r4d" />
+    <img src="https://i.imgur.com/xJNnGh5.png" />
   </kbd>
 </div>
 
@@ -28,14 +28,6 @@ PomoZoro provides a structured approach to work and breaks, helping you maintain
 - Redux (Redux Toolkit)
 
 ## Getting started
-
-### Install
-
-Ideally, write a script whose usage is described here.
-
-### Configure
-
-Manual, context-specific tasks not covered in the installation process.
 
 ### Usage
 
