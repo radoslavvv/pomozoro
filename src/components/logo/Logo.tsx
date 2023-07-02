@@ -3,7 +3,7 @@ import ILogoProps from "./ILogoProps";
 
 import styles from "./Logo.module.scss";
 import { RootState } from "../../store/Store";
-import Color from "../../shared/enums/Color";
+import Color from "../../enums/Color";
 
 const Logo = (props: ILogoProps) => {
 	const color: Color = useSelector(

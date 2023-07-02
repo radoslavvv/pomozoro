@@ -1,6 +1,5 @@
-import Color from "../../../shared/enums/Color";
-import FontType from "../../../shared/enums/FontType";
-import SetttingsModel from "../../../shared/models/SettingsModel";
+import Color from "../../../enums/Color";
+import FontType from "../../../enums/FontType";
 
 export interface ISettingsState {
 	pomodoroMinutes: number;

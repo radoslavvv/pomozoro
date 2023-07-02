@@ -4,7 +4,7 @@ import IProgressBarProps from "./IProgressBarProps";
 import styles from "./ProgressBar.module.scss";
 import { RootState, useAppDispatch } from "../../../store/Store";
 import { useSelector } from "react-redux";
-import Color from "../../../shared/enums/Color";
+import Color from "../../../enums/Color";
 
 const ProgressBar = (props: IProgressBarProps) => {
 	const progressBarValue: any = useSelector(

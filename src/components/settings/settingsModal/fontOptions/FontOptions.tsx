@@ -3,8 +3,9 @@ import { useSelector } from "react-redux";
 import styles from "./FontOptions.module.scss";
 import { RootState, useAppDispatch } from "../../../../store/Store";
 import IFontOptionsProps from "./IFontOptionsProps";
-import FontType from "../../../../shared/enums/FontType";
+
 import { setCurrentFontType } from "../../../../store/features/settings/SettingsSlice";
+import FontType from "../../../../enums/FontType";
 
 const FontOptions = (props: IFontOptionsProps) => {
 	const dispatch = useAppDispatch();

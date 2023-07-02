@@ -14,7 +14,7 @@ import {
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import store, { RootState, useAppDispatch } from "../store/Store";
-import ClockMode from "../shared/enums/ClockMode";
+import ClockMode from "../enums/ClockMode.ts";
 
 const useClock = () => {
 	const dispatch = useAppDispatch();

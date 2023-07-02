@@ -4,9 +4,10 @@ import ProgressBar from "./progressBar/ProgressBar";
 import styles from "./Clock.module.scss";
 import useClock from "../../hooks/useClock";
 import ClockButton from "./clockButton/ClockButton";
-import FontType from "../../shared/enums/FontType";
+
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/Store";
+import FontType from "../../enums/FontType";
 
 const Clock = (props: IClockProps) => {
 	const { clockButtonClickHandler, clockFormattedCurrentTime } = useClock();

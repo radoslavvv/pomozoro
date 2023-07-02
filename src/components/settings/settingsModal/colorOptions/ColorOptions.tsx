@@ -2,13 +2,13 @@ import { useSelector } from "react-redux";
 
 import styles from "./ColorOptions.module.scss";
 import { RootState, useAppDispatch } from "../../../../store/Store";
-import FontType from "../../../../shared/enums/FontType";
+
 import {
 	setCurrentColor,
 	setCurrentFontType,
 } from "../../../../store/features/settings/SettingsSlice";
 import IColorOptionsProps from "./IColorOptionsProps";
-import Color from "../../../../shared/enums/Color";
+import Color from "../../../../enums/Color";
 
 const ColorOptions = (props: IColorOptionsProps) => {
 	const dispatch = useAppDispatch();

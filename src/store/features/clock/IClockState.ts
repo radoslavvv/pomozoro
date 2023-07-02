@@ -1,4 +1,4 @@
-import ClockMode from "../../../shared/enums/ClockMode";
+import ClockMode from "../../../enums/ClockMode";
 
 export interface IClockState {
 	isRunning: boolean;

@@ -3,14 +3,15 @@ import IModeSliderProps from "./IModeSliderProps";
 
 import styles from "./ModeSlider.module.scss";
 import { RootState, useAppDispatch } from "../../store/Store";
-import ClockMode from "../../shared/enums/ClockMode";
+
 import {
 	pause,
 	reset,
 	setClockMode,
 } from "../../store/features/clock/ClockSlice.ts";
-import Color from "../../shared/enums/Color.ts";
-import FontType from "../../shared/enums/FontType.ts";
+import Color from "../../enums/Color.ts";
+import FontType from "../../enums/FontType.ts";
+import ClockMode from "../../enums/ClockMode.ts";
 
 const ModeSlider = (props: IModeSliderProps) => {
 	const dispatch = useAppDispatch();

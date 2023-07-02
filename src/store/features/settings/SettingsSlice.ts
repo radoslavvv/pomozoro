@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ISettingsState } from "./ISettingsState";
-import FontType from "../../../shared/enums/FontType";
-import Color from "../../../shared/enums/Color";
+import Color from "../../../enums/Color";
+import FontType from "../../../enums/FontType";
 
 const initialState: ISettingsState = {
 	pomodoroMinutes: 25,
