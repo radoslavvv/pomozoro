@@ -6,12 +6,13 @@ import {
 import ISettingsModalProps from "./ISettingsModalProps";
 
 import styles from "./SettingsModal.module.scss";
-import TimeOptions from "./timeOptions/TimeInputs";
+import TimeOptions from "./timeOptions/TimeOptions";
 import FontOptions from "./fontOptions/FontOptions";
 import ColorOptions from "./colorOptions/ColorOptions";
-import Color from "../../../shared/enums/Color";
+
 import { useSelector } from "react-redux";
-import FontType from "../../../shared/enums/FontType";
+import Color from "../../../enums/Color";
+import FontType from "../../../enums/FontType";
 
 const SettingsModal = (props: ISettingsModalProps) => {
 	const dispatch = useAppDispatch();
