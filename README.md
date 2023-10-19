@@ -4,7 +4,7 @@ PomoZoro is a cool and simple web-based timer that implements the Pomodoro Techn
 
 <div align="center">
   <kbd>
-    <img src="https://i.imgur.com/xJNnGh5.png" />
+    <img src="https://i.imgur.com/b1ns0OL.png" />
   </kbd>
 </div>
 
