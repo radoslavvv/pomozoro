@@ -1,22 +1,38 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ISettingsState } from "./ISettingsState";
-import Color from "../../../enums/Color";
+
+import AppColor from "../../../enums/Color";
 import FontType from "../../../enums/FontType";
+
+interface ISettingsState {
+	pomodoroMinutes: number;
+	shortBreakMinutes: number;
+	longBreakMinutes: number;
+	fontType: FontType;
+	appColor: AppColor;
+
+	modalIsOpen: boolean;
+
+	formPomodoroMinutes: string;
+	formShortBreakMinutes: string;
+	formLongBreakMinutes: string;
+	formFontType: FontType;
+	formColor: AppColor;
+}
 
 const initialState: ISettingsState = {
 	pomodoroMinutes: 25,
 	shortBreakMinutes: 5,
 	longBreakMinutes: 15,
 	fontType: FontType.Poppins,
-	color: Color.Red,
+	appColor: AppColor.Red,
 
 	modalIsOpen: false,
 
-	currentPomodoroMinutes: "1",
-	currentShortBreakMinutes: "5",
-	currentLongBreakMinutes: "15",
-	currentFontType: FontType.Poppins,
-	currentColor: Color.Red,
+	formPomodoroMinutes: "25",
+	formShortBreakMinutes: "5",
+	formLongBreakMinutes: "15",
+	formFontType: FontType.Poppins,
+	formColor: AppColor.Red,
 };
 
 export const SettingsSlice = createSlice({
@@ -26,47 +42,45 @@ export const SettingsSlice = createSlice({
 		setModalIsOpen: (state, action: PayloadAction<boolean>) => {
 			state.modalIsOpen = action.payload;
 			if (action.payload) {
-				state.currentPomodoroMinutes = state.pomodoroMinutes.toString();
-				state.currentShortBreakMinutes =
+				state.formPomodoroMinutes = state.pomodoroMinutes.toString();
+				state.formShortBreakMinutes =
 					state.shortBreakMinutes.toString();
-				state.currentLongBreakMinutes =
-					state.longBreakMinutes.toString();
+				state.formLongBreakMinutes = state.longBreakMinutes.toString();
 			}
 		},
-
-		setCurrentPomodoroMinutes: (state, action: PayloadAction<string>) => {
-			state.currentPomodoroMinutes = action.payload;
+		setFormPomodoroMinutes: (state, action: PayloadAction<string>) => {
+			state.formPomodoroMinutes = action.payload;
 		},
-		setCurrentShortBreakMinutes: (state, action: PayloadAction<string>) => {
-			state.currentShortBreakMinutes = action.payload;
+		setFormShortBreakMinutes: (state, action: PayloadAction<string>) => {
+			state.formShortBreakMinutes = action.payload;
 		},
-		setCurrentLongBreakMinutes: (state, action: PayloadAction<string>) => {
-			state.currentLongBreakMinutes = action.payload;
+		setFormLongBreakMinutes: (state, action: PayloadAction<string>) => {
+			state.formLongBreakMinutes = action.payload;
 		},
-		setCurrentFontType: (state, action: PayloadAction<FontType>) => {
-			state.currentFontType = action.payload;
+		setFormFontType: (state, action: PayloadAction<FontType>) => {
+			state.formFontType = action.payload;
 		},
-		setCurrentColor: (state, action: PayloadAction<Color>) => {
-			state.currentColor = action.payload;
+		setFormColor: (state, action: PayloadAction<AppColor>) => {
+			state.formColor = action.payload;
 		},
 		applyChanges: (state) => {
-			state.pomodoroMinutes = Number(state.currentPomodoroMinutes);
-			state.shortBreakMinutes = Number(state.currentShortBreakMinutes);
-			state.longBreakMinutes = Number(state.currentLongBreakMinutes);
+			state.pomodoroMinutes = Number(state.formPomodoroMinutes);
+			state.shortBreakMinutes = Number(state.formShortBreakMinutes);
+			state.longBreakMinutes = Number(state.formLongBreakMinutes);
 
-			state.fontType = state.currentFontType;
-			state.color = state.currentColor;
+			state.fontType = state.formFontType;
+			state.appColor = state.formColor;
 		},
 	},
 });
 
 export const {
 	setModalIsOpen,
-	setCurrentPomodoroMinutes,
-	setCurrentShortBreakMinutes,
-	setCurrentLongBreakMinutes,
-	setCurrentFontType,
-	setCurrentColor,
+	setFormPomodoroMinutes,
+	setFormShortBreakMinutes,
+	setFormLongBreakMinutes,
+	setFormFontType,
+	setFormColor,
 	applyChanges,
 } = SettingsSlice.actions;
 

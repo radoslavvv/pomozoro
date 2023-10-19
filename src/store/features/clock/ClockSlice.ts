@@ -2,7 +2,24 @@ import moment from "moment";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import ClockMode from "../../../enums/ClockMode";
-import { IClockState } from "./IClockState";
+
+interface IClockState {
+	isRunning: boolean;
+	isFinished: boolean;
+
+	startTime: moment.Moment | null;
+	endTime: moment.Moment | null;
+
+	currentDuration: moment.Duration | null;
+	totalDuration: moment.Duration | null;
+
+	progressBarValue: number;
+
+	pomodoroCount: number;
+	shortBreaksCount: number;
+
+	clockMode: ClockMode;
+}
 
 const initialState: IClockState = {
 	isRunning: false,

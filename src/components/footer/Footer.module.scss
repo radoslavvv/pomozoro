@@ -1,0 +1,34 @@
+@use "../../shared/styles/" as *;
+
+.footer {
+	position: absolute;
+	bottom: 0;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	width: 100%;
+
+	padding: 20px;
+
+	background-color: $darkBlue;
+
+	a {
+		text-decoration: none;
+
+		color: $lightGray;
+
+		font-family: "Poppins";
+		font-size: 17px;
+		font-weight: bold;
+
+		cursor: pointer;
+		transition-duration: 0.2s;
+		user-select: none;
+
+		&:hover {
+			color: $veryLightGray;
+		}
+	}
+}

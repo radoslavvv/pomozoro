@@ -1,18 +1,22 @@
-import "./App.module.scss";
-import Logo from "./logo/Logo";
+import Header from "./header/Header";
+import Clock from "./clock/Clock";
+import ClockModeSlider from "./clockModeSlider/ClockModeSlider";
+import SettingsModal from "./settingsModal/SettingsModal";
 
 import styles from "./App.module.scss";
-import Clock from "./clock/Clock";
-import ModeSlider from "./modeSlider/ModeSlider";
-import Settings from "./settings/Settings";
+import Footer from "./footer/Footer";
 
 function App() {
 	return (
 		<div className={styles.app}>
-			<Logo />
-			<ModeSlider />
+			<Header />
+
+			<ClockModeSlider />
 			<Clock />
-			<Settings />
+
+			<SettingsModal />
+
+			<Footer />
 		</div>
 	);
 }

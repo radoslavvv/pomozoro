@@ -1,34 +1,23 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
+/* eslint-disable react-hooks/exhaustive-deps */
 import moment from "moment";
-import {
-	pause,
-	setEndTime,
-	setIsFinished,
-	setIsRunning,
-	setProgressBarValue,
-	setStartTime,
-	setTotalDuration,
-	setCurrentDuration,
-	finish,
-	reset,
-} from "../store/features/clock/ClockSlice.ts";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import store, { RootState, useAppDispatch } from "../store/Store";
+
+import * as ClockSlice from "../store/features/clock/ClockSlice.ts";
+
+import { RootState, useAppDispatch } from "../store/Store";
+
 import ClockMode from "../enums/ClockMode.ts";
 
 const useClock = () => {
 	const dispatch = useAppDispatch();
 
-	const totalDuration: moment.Duration | any = useSelector(
+	const totalDuration: moment.Duration | null = useSelector(
 		(state: RootState) => state.clock.totalDuration
 	);
-
-	const currentDuration: moment.Duration | any = useSelector(
+	const currentDuration: moment.Duration | null = useSelector(
 		(state: RootState) => state.clock.currentDuration
-	);
-
-	const progressBarValue: number = useSelector(
-		(state: RootState) => state.clock.progressBarValue
 	);
 
 	const isRunning: boolean = useSelector(
@@ -45,16 +34,16 @@ const useClock = () => {
 	const pomodoroMinutes: number = useSelector(
 		(state: RootState) => state.settings.pomodoroMinutes
 	);
-
 	const shortBreakMinutes: number = useSelector(
 		(state: RootState) => state.settings.shortBreakMinutes
 	);
-
 	const longBreakMinutes: number = useSelector(
 		(state: RootState) => state.settings.longBreakMinutes
 	);
 
-	const getCurrentClockModeMinutes = (currentClockMode: ClockMode) => {
+	const getCurrentClockModeMinutes = (
+		currentClockMode: ClockMode
+	): number => {
 		if (currentClockMode === ClockMode.Pomodoro) {
 			return pomodoroMinutes;
 		} else if (currentClockMode === ClockMode.ShortBreak) {
@@ -77,40 +66,12 @@ const useClock = () => {
 		`${clockMinutes.toString().padStart(2, "0")}:00`
 	);
 
-	const updateClock = (): void => {
-		setTimeout(() => {
-			if (store.getState().clock.isRunning) {
-				const newDuration: moment.Duration = moment
-					.duration(currentDuration)
-					.add(-0.1, "seconds");
-
-				if (
-					currentDuration.minutes() <= 0 &&
-					currentDuration.seconds() <= 0
-				) {
-					dispatch(reset());
-					dispatch(finish());
-				} else {
-					dispatch(setCurrentDuration(newDuration));
-				}
-			}
-		}, 100);
-	};
-
-	const updateProgressBar = (): void => {
-		setTimeout(() => {
-			const timePercentage: number =
-				((totalDuration.asMilliseconds() -
-					currentDuration.asMilliseconds()) *
-					100) /
-				totalDuration.asMilliseconds();
-
-			const newProgressBarValue: number = (timePercentage / 100) * 900;
-
-			if (store.getState().clock.isRunning) {
-				dispatch(setProgressBarValue(newProgressBarValue));
-			}
-		}, 100);
+	const handleClockButtonClick = (): void => {
+		if (isRunning) {
+			pauseClock();
+		} else {
+			startClock();
+		}
 	};
 
 	const startClock = (): void => {
@@ -119,55 +80,87 @@ const useClock = () => {
 
 		if (isFinished) {
 			newStartTime = moment();
-			dispatch(setStartTime(newStartTime));
+			dispatch(ClockSlice.setStartTime(newStartTime));
 
 			newEndTime = moment().add(clockMinutes, "minute");
-			dispatch(setEndTime(newEndTime));
+			dispatch(ClockSlice.setEndTime(newEndTime));
 
 			const newTotalDuration = moment.duration(
 				newEndTime.diff(newStartTime)
 			);
 
-			dispatch(setTotalDuration(newTotalDuration));
-			dispatch(setCurrentDuration(newTotalDuration));
+			dispatch(ClockSlice.setTotalDuration(newTotalDuration));
+			dispatch(ClockSlice.setCurrentDuration(newTotalDuration));
 		}
 
-		dispatch(setIsRunning(true));
-		dispatch(setIsFinished(false));
+		dispatch(ClockSlice.setIsRunning(true));
+		dispatch(ClockSlice.setIsFinished(false));
 	};
 
-	const pauseClock = () => {
-		dispatch(pause());
-	};
-
-	const clockButtonClickHandler = (): void => {
+	const updateClock = (): void => {
 		if (isRunning) {
-			pauseClock();
-		} else {
-			startClock();
+			const newDuration: moment.Duration = moment
+				.duration(currentDuration)
+				.add(-0.1, "seconds");
+			if (
+				currentDuration &&
+				currentDuration &&
+				currentDuration.minutes() <= 0 &&
+				currentDuration.seconds() <= 0
+			) {
+				dispatch(ClockSlice.reset());
+				dispatch(ClockSlice.finish());
+			} else {
+				dispatch(ClockSlice.setCurrentDuration(newDuration));
+			}
+		}
+	};
+
+	const pauseClock = (): void => {
+		dispatch(ClockSlice.pause());
+	};
+
+	const updateProgressBar = (): void => {
+		const timePercentage: number =
+			totalDuration && currentDuration
+				? ((totalDuration.asMilliseconds() -
+						currentDuration.asMilliseconds()) *
+						100) /
+				  totalDuration.asMilliseconds()
+				: 100;
+
+		const newProgressBarValue: number = (timePercentage / 100) * 900;
+
+		if (isRunning) {
+			dispatch(ClockSlice.setProgressBarValue(newProgressBarValue));
 		}
 	};
 
 	useEffect(() => {
-		if (!isRunning && isFinished) {
-			dispatch(setProgressBarValue(0));
+		if (isRunning) {
+			const clockInterval: number = setInterval(updateClock, 100);
+
+			return () => {
+				clearInterval(clockInterval);
+			};
 		}
-	}, [progressBarValue]);
+	}, [isRunning, updateClock]);
 
 	useEffect(() => {
 		if (isRunning) {
-			updateProgressBar();
-		}
-	}, [isRunning, progressBarValue, currentDuration]);
+			const progressBarInterval: number = setInterval(
+				updateProgressBar,
+				5
+			);
 
-	useEffect(() => {
-		if (isRunning) {
-			updateClock();
+			return () => {
+				clearInterval(progressBarInterval);
+			};
 		}
-	}, [isRunning, currentDuration]);
+	}, [isRunning, updateProgressBar]);
 
 	return {
-		clockButtonClickHandler,
+		handleClockButtonClick,
 		isRunning,
 		clockFormattedCurrentTime,
 	};

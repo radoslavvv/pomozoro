@@ -1,42 +1,33 @@
 @use "../../shared/styles/" as *;
 
-.logo {
+.header {
 	display: flex;
 	justify-content: center;
 	align-items: flex-start;
 
-	margin-top: 45px;
-	margin-bottom: 45px;
+	width: 100%;
+
+	margin: 0px;
+	padding: 5px 0px;
 
 	color: $white;
+	background: $darkBlue;
 
 	font-family: "Pacifico";
-	font-size: 35px;
+	font-size: 50px;
 
 	z-index: 0;
-	transition-duration: 0.3s;
+	transition-duration: 0.5s;
 	user-select: none;
 
 	animation: slideDownSlow 0.2s ease-in-out;
-
-	@include mobile {
-		margin: 25px auto;
-	}
-
-	&:hover {
-		transform: scale(1.05);
-
-		span {
-			transform: scale(1.07);
-		}
-	}
 
 	span {
 		margin-left: -3px;
 
 		font-family: "Comforter";
-		font-size: 105px;
-		line-height: 70px;
+		font-size: 110px;
+		line-height: 100px;
 		font-weight: bold;
 
 		transition-duration: 0.3s;

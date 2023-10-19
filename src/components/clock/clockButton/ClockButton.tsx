@@ -1,12 +1,13 @@
-import { RootState } from "../../../store/Store";
 import { useSelector } from "react-redux";
-import IClockButtonProps from "./IClockButtonProps";
 
-import styles from "./ClockButton.module.scss";
+import { RootState } from "../../../store/Store";
+
 import FontType from "../../../enums/FontType";
 
-const ClockButton = (props: IClockButtonProps) => {
-	const isRunning: any = useSelector(
+import styles from "./ClockButton.module.scss";
+
+const ClockButton = () => {
+	const isRunning: boolean = useSelector(
 		(state: RootState) => state.clock.isRunning
 	);
 

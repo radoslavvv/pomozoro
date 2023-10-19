@@ -30,32 +30,16 @@
 
 		&:hover {
 			transform: scale(1.03);
+
+			button[class*="clockButton"] {
+				letter-spacing: 10px;
+
+				margin-right: -10px;
+			}
 		}
 
 		&:active {
 			transform: scale(0.85);
-		}
-
-		&:before {
-			content: "";
-			z-index: -1;
-			position: absolute;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
-			background: linear-gradient(155deg, $lightBlue 50%, $darkBlue 50%);
-			transform: translate3d(0px, 0px, 0) scale(1.5);
-			filter: blur(50px);
-			// opacity: var(0.7);
-			inset: -5px;
-			transition: opacity 0.3s;
-			border-radius: inherit;
-			pointer-events: none;
-
-			&:hover {
-				position: relative;
-			}
 		}
 
 		&::after {
@@ -116,7 +100,7 @@
 		}
 
 		.time {
-			font-size: 75px;
+			font-size: 70px;
 			font-family: "Poppins";
 			font-weight: bold;
 

@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react";
-import IProgressBarProps from "./IProgressBarProps";
+import { useSelector } from "react-redux";
+
+import { RootState } from "../../../store/Store";
+
+import AppColor from "../../../enums/Color";
 
 import styles from "./ProgressBar.module.scss";
-import { RootState, useAppDispatch } from "../../../store/Store";
-import { useSelector } from "react-redux";
-import Color from "../../../enums/Color";
 
-const ProgressBar = (props: IProgressBarProps) => {
-	const progressBarValue: any = useSelector(
+const ProgressBar = () => {
+	const progressBarValue: number = useSelector(
 		(state: RootState) => state.clock.progressBarValue
 	);
 
-	const color: Color = useSelector(
-		(state: RootState) => state.settings.color
+	const color: AppColor = useSelector(
+		(state: RootState) => state.settings.appColor
 	);
 
 	return (
